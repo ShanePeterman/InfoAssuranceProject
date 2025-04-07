@@ -1,0 +1,8 @@
+<div>
+    <h1>File storage system</h1>
+    <h4>Enter your credentials</h4>
+    <p>username: <input type='text' [(ngModel)]="username"></p>
+    <p>password: <input type='password' [(ngModel)]="password"></p>
+    <button (click)="onLogin()">Login</button>
+    <p>No account? Create one <a [routerLink]="['/create-account']">here</a></p>
+</div>
