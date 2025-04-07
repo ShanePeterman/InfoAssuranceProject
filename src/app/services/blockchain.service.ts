@@ -37,9 +37,7 @@ export class BlockchainService {
 
   async getHashes() {
     const hashes = this.contract.methods.getIPFSHash().call();
-    const resolvedHashes = await Promise.all([
-      hashes
-    ])
+    const resolvedHashes = await Promise.all([hashes]);
     return resolvedHashes;
   }
 
@@ -47,9 +45,10 @@ export class BlockchainService {
   //I tried for so long to get it working on my own but ran out of time and found an example that worked well since
   //the node won't allow you to send an unsigned transaction and I did not have enough time to figure things out on my own
   // I plan on fixing this to either include a private key or do something different between now and deployment of the paper
-  // This is simply just a demonstration for proof of concept and is not a finished product, and I am not attempting to turn this in 
-  // for credit.
-  async addHash(hash:string): Promise<string> {
+  // This is simply just a demonstration for proof of concept and is not a finished product, and I am not attempting to turn this in
+  // for credit. Credit for this code goes to joshua morony on youtube, although I did research to make sure I understood it before I
+  //Used it
+  async addHash(hash: string): Promise<string> {
     //detect the ethereum network provider - Shane Peterman
     const provider: any = await detectEthereumProvider();
 
@@ -60,7 +59,7 @@ export class BlockchainService {
     //the next being the address of my metamask browser extension wallet
     //and the third being the method to be executed along with the Application Binary Interface - Shane Peterman
     const transactionParameters = {
-      to: this.contract.options.address, 
+      to: this.contract.options.address,
       from: provider.selectedAddress,
       data: this.contract.methods.setIPFSHash(hash).encodeABI(),
     };
